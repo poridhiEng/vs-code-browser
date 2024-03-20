@@ -31,7 +31,7 @@ docker cp 4c432caca6f9:/root/.local ./local
 
 Now, we will create an image that will have these configs predefined as soon as the container starts
 
-- Step 4: Now, Build another image using docker file `Dockerfile.python` 
+- Step 4: Now, Build another image using docker file `Dockerfile.python`
 
 ```bash
 
@@ -42,3 +42,13 @@ docker run --rm -p 8080:8080 demo2:v1
 ```
 
 - Step 5: Go to url `http://localhost:8080/?folder=/app`
+
+### Using the proxy server
+
+```bash
+go run main.go
+```
+
+go to `http://localhost:3000/namespace/?folder=/app` in browser.
+
+In the handler function we can check for session passed from frontend.
