@@ -41,4 +41,4 @@ docker run --rm -p 8080:8080 demo2:v1
 
 ```
 
-- Step 5: Go to url `http://localhost:3000/?folder=/app`
+- Step 5: Go to url `http://localhost:8080/?folder=/app`
