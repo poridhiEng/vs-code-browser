@@ -45,6 +45,8 @@ docker run --rm -p 8080:8080 demo2:v1
 
 ### Using the proxy server
 
+Make sure the code server is running on port 8080.
+
 ```bash
 go run main.go
 ```
