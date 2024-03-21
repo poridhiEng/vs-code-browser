@@ -12,8 +12,8 @@ func main() {
 
 	// this should come from db
 	targets := map[string]string{
-		"v1": "http://localhost:8080",
-		"v2": "http://localhost:7080",
+		"ns1": "http://localhost:8080",
+		"ns2": "http://localhost:7080",
 	}
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
