@@ -11,6 +11,8 @@ import (
 
 func main() {
 
+	fmt.Println("Running..")
+
 	fqdn := "${splitPath}.${splitPath}.svc.cluster.local"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
