@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+        - name: code-server-container
+          image: poridhi/demo-code-server:v8
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
