@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -10,11 +11,7 @@ import (
 
 func main() {
 
-	// this should come from db
-	targets := map[string]string{
-		"ns1": "http://localhost:8080",
-		"ns2": "http://localhost:7080",
-	}
+	fqdn := "${splitPath}.${splitPath}.svc.cluster.local"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if strings.Count(r.URL.Path, "/") < 2 {
@@ -23,13 +20,21 @@ func main() {
 		}
 
 		splitPaths := strings.SplitN(r.URL.Path, "/", 3)
+		fmt.Println("splitting----->", splitPaths)
 
-		target, _ := targets[splitPaths[1]]
+		splitPath := splitPaths[1] // Extract the desired part of the path
+		fmt.Println("splitPath---->", splitPath)
+
+		// Construct the FQDN by replacing placeholders with the splitPath value
+		target := strings.ReplaceAll(fqdn, "${splitPath}", splitPath)
+		fmt.Println("target---->", target)
 
 		remote, err := url.Parse(target)
 		if err != nil {
 			panic(err)
 		}
+
+		fmt.Println("remote------>", remote)
 
 		proxy := httputil.NewSingleHostReverseProxy(remote)
 
@@ -42,7 +47,7 @@ func main() {
 
 			// Split the URL path and remove the first element (dynamic text/ID)
 			splitPath := strings.SplitN(req.URL.Path, "/", 3)
-			log.Println(splitPath)
+			log.Println("namespace", splitPath)
 			if len(splitPath) > 2 {
 				req.URL.Path = "/" + splitPath[2]
 			} else {
