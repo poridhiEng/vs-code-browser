@@ -19,3 +19,8 @@ push:
 	@ echo "Pushing Docker image for repository ${repo}, image ${image}, tag ${tag} to the registry..."
 	@ docker push ${repo}/${image}:${tag}
 	@ echo "Image ${repo}/${image}:${tag} successfully pushed to the registry."
+
+pull:
+	@ echo "Pulling Docker image for repository ${repo}, image ${image}, tag ${tag} to the registry..."
+	@ docker pull ${repo}/${image}:${tag}
+	@ echo "Image ${repo}/${image}:${tag} successfully pulled to the registry."

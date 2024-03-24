@@ -19,6 +19,6 @@ spec:
         image: cloudflare/cloudflared:latest
         # image: ghcr.io/maggie0002/cloudflared:2022.7.1
         imagePullPolicy: Always
-        args: ["tunnel", "--no-autoupdate", "run", "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiY2M3MjhiZGEtMjhiYi00MDVhLWJlYjYtNjQ1M2ZiMjEwYjM1IiwicyI6Ik1EVmlPREZsTmpVdE16UTFOaTAwWmpoaExXRXhaVFV0TUdZd09XWTVZMlU0WVRGaiJ9"]
+        args: ["tunnel", "--no-autoupdate", "run", "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiNjMxZjRjZmQtZGVlZi00YjM0LThkZjYtY2Q4NzM0MjgwOGY0IiwicyI6IlpHSTFaV0k1TldRdFltRm1NaTAwTXpneExUZzJaalV0TldGak1HWmlaalpoTm1aayJ9"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 60

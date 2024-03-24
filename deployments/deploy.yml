@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: codeserver-proxy-container
-          image: poridhi/codeserver-reverse-proxy:v1.2
+          image: poridhi/codeserver-reverse-proxy:v1.3
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 3000
