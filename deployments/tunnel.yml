@@ -2,23 +2,23 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: codeserver-tunnel
-  name: codeserver-tunnel
+    app: codeserver-proxy-tunnel
+  name: codeserver-proxy-tunnel
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: codeserver-tunnel
+      app: codeserver-proxy-tunnel
   template:
     metadata:
       labels:
-        app: codeserver-tunnel
+        app: codeserver-proxy-tunnel
     spec:
       containers:
-      - name: codeserver-tunnel
+      - name: codeserver-proxy-tunnel
         image: cloudflare/cloudflared:latest
         # image: ghcr.io/maggie0002/cloudflared:2022.7.1
         imagePullPolicy: Always
-        args: ["tunnel", "--no-autoupdate", "run", "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiOGQ1OTlkZDEtOWYwZi00YTBjLWJlZTctODVjZTI2N2NiN2JjIiwicyI6Ik1qTTFNRGMwT1RrdE4yVTBOUzAwTm1ZMExXSXpZalV0WXpBeU5UYzVZemc1WWpObSJ9"]
+        args: ["tunnel", "--no-autoupdate", "run", "--token=eyJhIjoiZGMwMTdkY2RkOWZiOTMzMmJjNTRhNDgxODIwYjhlMjYiLCJ0IjoiY2M3MjhiZGEtMjhiYi00MDVhLWJlYjYtNjQ1M2ZiMjEwYjM1IiwicyI6Ik1EVmlPREZsTmpVdE16UTFOaTAwWmpoaExXRXhaVFV0TUdZd09XWTVZMlU0WVRGaiJ9"]
       restartPolicy: Always
       terminationGracePeriodSeconds: 60

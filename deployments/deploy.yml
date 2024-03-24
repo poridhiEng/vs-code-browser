@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: code-server-deployment
+  name: codeserver-proxy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: code-server
+      app: codeserver
   template:
     metadata:
       labels:
-        app: code-server
+        app: codeserver
     spec:
       containers:
-        - name: code-server-container
-          image: poridhi/demo-code-server:v8
+        - name: codeserver-proxy-container
+          image: poridhi/codeserver-reverse-proxy:v1.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
