@@ -10,10 +10,7 @@ import (
 )
 
 func main() {
-
 	fmt.Println("Running..")
-
-	fqdn := "${splitPath}.${splitPath}.svc.cluster.local"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if strings.Count(r.URL.Path, "/") < 2 {
@@ -27,13 +24,15 @@ func main() {
 		splitPath := splitPaths[1] // Extract the desired part of the path
 		fmt.Println("splitPath---->", splitPath)
 
-		// Construct the FQDN by replacing placeholders with the splitPath value
-		target := strings.ReplaceAll(fqdn, "${splitPath}", splitPath)
+		// Construct the FQDN using the splitPath value
+		target := fmt.Sprintf("http://%s.%s.svc.cluster.local", splitPath, splitPath)
 		fmt.Println("target---->", target)
 
 		remote, err := url.Parse(target)
 		if err != nil {
-			panic(err)
+			log.Printf("Error parsing target URL: %v\n", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
 		}
 
 		fmt.Println("remote------>", remote)
@@ -46,15 +45,6 @@ func main() {
 			director(req)
 
 			log.Println(req.URL.Path)
-
-			// Split the URL path and remove the first element (dynamic text/ID)
-			splitPath := strings.SplitN(req.URL.Path, "/", 3)
-			log.Println("namespace", splitPath)
-			if len(splitPath) > 2 {
-				req.URL.Path = "/" + splitPath[2]
-			} else {
-				req.URL.Path = "/"
-			}
 
 			// Update the headers
 			req.Header.Set("Host", req.Host)
@@ -71,6 +61,6 @@ func main() {
 
 	err := http.ListenAndServe(":3000", nil)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Error starting server: %v\n", err)
 	}
 }
