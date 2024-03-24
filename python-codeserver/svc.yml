@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: codeserver-python
+  namespace: codeserver-python   # Specify your desired namespace here
+spec:
+  selector:
+    app: codeserver-python
+  ports:
+    - protocol: TCP
+      port: 80  # The port on which the service will be exposed within the cluster
+      targetPort: 8080  # The port on which the container listens
+  type: ClusterIP

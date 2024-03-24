@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codeserver-python
+  namespace: codeserver-python   # Specify your desired namespace here
+spec:
+  replicas: 1  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: codeserver-python
+  template:
+    metadata:
+      labels:
+        app: codeserver-python
+    spec:
+      containers:
+      - name: codeserver-python
+        image: poridhi/codeserver-python:v1.2
+        ports:
+        - containerPort: 8080  # Assuming your application runs on port 8080
